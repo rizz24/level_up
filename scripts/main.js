@@ -13,6 +13,7 @@ let combatlimitXP = 100;
 let combatNextLVL = 100;
 let combatRemain = 0;
 let combatASC = 0;
+let combatCanAscend = false;
 let CombatAscended = false;
 let CombatAscended2 = false;
 let CombatAscended3 = false;
@@ -25,6 +26,7 @@ let lumberlimitXP = 100;
 let lumberNextLVL = 100;
 let lumberRemain = 0;
 let lumberASC = 0;
+let lumberCanAscend = false;
 let LumberAscended = false;
 let LumberAscended2 = false;
 let LumberAscended3 = false;
@@ -37,6 +39,7 @@ let mininglimitXP = 100;
 let miningNextLVL = 100;
 let miningRemain = 0;
 let miningASC = 0;
+let minerCanAscend = false;
 let MinerAscended = false;
 let MinerAscended2 = false;
 let MinerAscended3 = false;
@@ -49,6 +52,7 @@ let farminglimitXP = 100;
 let farmingNextLVL = 100;
 let farmingRemain = 0;
 let farmingASC = 0;
+let farmerCanAscend = false;
 let FarmerAscended = false;
 let FarmerAscended2 = false;
 let FarmerAscended3 = false;
@@ -145,14 +149,15 @@ world.beforeEvents.itemUse.subscribe(data => {
         let nxtLvl = combatNextLVL
         combatRemain = nxtLvl - xp
 
-        new ActionFormData()
+        if (combatCanAscend === !false) {
+            new ActionFormData()
             .title(`§l§bCombat Profile`)
             .body(
                 `§a  - - - - - - - - - - - - - - - - - - -\n\n`+
                 `    §fCombat Level: `+ combatLVL +`\n\n`+
-                `    Combat XP:\n       `+ combatXP +` / `+ combatNextLVL +
-                `  \n      ( `+ combatRemain +`XP to go )\n\n`+
-                `    Combat Ascencion: `+ combatASC +`\n\n`+
+                `    Combat XP: §lFull§r§f\n` +
+                `  \n          ( Ready for Ascension )\n\n`+
+                `    Combat Ascension: `+ combatASC +`\n\n`+
                 `§a  - - - - - - - - - - - - - - - - - - -\n\n\n`
                 )
             .button("§l§cBack")
@@ -160,6 +165,23 @@ world.beforeEvents.itemUse.subscribe(data => {
                 if (r.selection == 0) Profile(player)
                 if (r.selection == 1) Profile(player)
             })
+        } else {
+            new ActionFormData()
+            .title(`§l§bCombat Profile`)
+            .body(
+                `§a  - - - - - - - - - - - - - - - - - - -\n\n`+
+                `    §fCombat Level: `+ combatLVL +`\n\n`+
+                `    Combat XP:\n       `+ combatXP +` / `+ combatNextLVL +
+                `  \n      ( `+ combatRemain +`XP to go )\n\n`+
+                `    Combat Ascension: `+ combatASC +`\n\n`+
+                `§a  - - - - - - - - - - - - - - - - - - -\n\n\n`
+                )
+            .button("§l§cBack")
+            .show(player).then(r => {
+                if (r.selection == 0) Profile(player)
+                if (r.selection == 1) Profile(player)
+            })
+        }
     }
 
     function lumberP() {
@@ -167,20 +189,37 @@ world.beforeEvents.itemUse.subscribe(data => {
         let nxtLvl = lumberNextLVL
         lumberRemain = nxtLvl - xp
 
-        new ActionFormData()
+        if (lumberCanAscend === !false) {
+            new ActionFormData()
             .title(`§l§bLumber Profile`)
             .body(
                 `§a  - - - - - - - - - - - - - - - - - - -\n\n`+
                 `    §fLumber Level: `+ lumberLVL +`\n\n`+
-                `    Lumber XP:\n       `+ lumberXP +` / `+ lumberNextLVL +
-                `  \n      ( `+ lumberRemain +`XP to go )\n\n`+
-                `    Lumber Ascencion: `+ lumberASC +`\n\n`+
+                `    Lumber XP: §lFull§r§f\n` +
+                `  \n          ( Ready for Ascension )\n\n`+
+                `    Lumber Ascension: `+ lumberASC +`\n\n`+
                 `§a  - - - - - - - - - - - - - - - - - - -\n\n\n`
                 )
             .button("§l§cBack")
             .show(player).then(r => {
                 if (r.selection == 0) Profile(player)
             })
+        } else {
+            new ActionFormData()
+            .title(`§l§bLumber Profile`)
+            .body(
+                `§a  - - - - - - - - - - - - - - - - - - -\n\n`+
+                `    §fLumber Level: `+ lumberLVL +`\n\n`+
+                `    Lumber XP:\n       `+ lumberXP +` / `+ lumberNextLVL +
+                `  \n      ( `+ lumberRemain +`XP to go )\n\n`+
+                `    Lumber Ascension: `+ lumberASC +`\n\n`+
+                `§a  - - - - - - - - - - - - - - - - - - -\n\n\n`
+                )
+            .button("§l§cBack")
+            .show(player).then(r => {
+                if (r.selection == 0) Profile(player)
+            })
+        }
     }
 
     function miningP() {
@@ -188,20 +227,37 @@ world.beforeEvents.itemUse.subscribe(data => {
         let nxtLvl = miningNextLVL
         miningRemain = nxtLvl - xp
 
-        new ActionFormData()
+        if (minerCanAscend ===  !false) {
+            new ActionFormData()
             .title(`§l§bMining Profile`)
             .body(
                 `§a  - - - - - - - - - - - - - - - - - - -\n\n`+
                 `    §fMining Level: `+ miningLVL +`\n\n`+
-                `    Mining XP:\n       `+ miningXP +` / `+ miningNextLVL +
-                `  \n      ( `+ miningRemain +`XP to go )\n\n`+
-                `    Mining Ascencion: `+ miningASC +`\n\n`+
+                `    Mining XP: §lFull§r§f\n` +
+                `  \n          ( Ready for Ascension )\n\n`+
+                `    Mining Ascension: `+ miningASC +`\n\n`+
                 `§a  - - - - - - - - - - - - - - - - - - -\n\n\n`
                 )
             .button("§l§cBack")
             .show(player).then(r => {
                 if (r.selection == 0) Profile(player)
             })
+        } else {
+            new ActionFormData()
+            .title(`§l§bMining Profile`)
+            .body(
+                `§a  - - - - - - - - - - - - - - - - - - -\n\n`+
+                `    §fMining Level: `+ miningLVL +`\n\n`+
+                `    Mining XP:\n       `+ miningXP +` / `+ miningNextLVL +
+                `  \n      ( `+ miningRemain +`XP to go )\n\n`+
+                `    Mining Ascension: `+ miningASC +`\n\n`+
+                `§a  - - - - - - - - - - - - - - - - - - -\n\n\n`
+                )
+            .button("§l§cBack")
+            .show(player).then(r => {
+                if (r.selection == 0) Profile(player)
+            })
+        }
     }
 
     function farmingP() {
@@ -209,20 +265,37 @@ world.beforeEvents.itemUse.subscribe(data => {
         let nxtLvl = farmingNextLVL
         farmingRemain = nxtLvl - xp
 
-        new ActionFormData()
+        if (farmerCanAscend === !false) {
+            new ActionFormData()
             .title(`§l§bFarming Profile`)
             .body(
                 `§a  - - - - - - - - - - - - - - - - - - -\n\n`+
                 `    §fFarming Level: `+ farmingLVL +`\n\n`+
-                `    Farming XP:\n       `+ farmingXP +` / `+ farmingNextLVL +
-                `  \n      ( `+ farmingRemain +`XP to go )\n\n`+
-                `    Farming Ascencion: `+ farmingASC +`\n\n`+
+                `    Farming XP: §lFull§r§f\n` +
+                `  \n          ( Ready for Ascension )\n\n`+
+                `    Farming Ascension: `+ farmingASC +`\n\n`+
                 `§a  - - - - - - - - - - - - - - - - - - -\n\n\n`
                 )
             .button("§l§cBack")
             .show(player).then(r => {
                 if (r.selection == 0) Profile(player)
             })
+        } else {
+            new ActionFormData()
+            .title(`§l§bFarming Profile`)
+            .body(
+                `§a  - - - - - - - - - - - - - - - - - - -\n\n`+
+                `    §fFarming Level: `+ farmingLVL +`\n\n`+
+                `    Farming XP:\n       `+ farmingXP +` / `+ farmingNextLVL +
+                `  \n      ( `+ farmingRemain +`XP to go )\n\n`+
+                `    Farming Ascension: `+ farmingASC +`\n\n`+
+                `§a  - - - - - - - - - - - - - - - - - - -\n\n\n`
+                )
+            .button("§l§cBack")
+            .show(player).then(r => {
+                if (r.selection == 0) Profile(player)
+            })
+        }
     }
 
     const getScore = (objective, target, useZero = true) => {
@@ -344,14 +417,6 @@ world.afterEvents.entityDie.subscribe((mcch) => {
                 deadEntity.runCommand(`title @p title Combat Leveled up!`);
             }, 0);
 
-            const ascensionStages = [
-                CombatAscended,
-                CombatAscended2,
-                CombatAscended3,
-                CombatAscended4,
-                CombatAscended5
-            ];
-
             if (combatLVL >= 20) {
                 for (let i = 0; i <= 5; i++) {
                     const key = i === 0 ? "CombatAscended" : `CombatAscended${i}`;
@@ -408,11 +473,13 @@ world.afterEvents.entityDie.subscribe((mcch) => {
                         case 5: ascended = CombatAscended5; break;
                     }
 
+                    combatCanAscend = true;
+
                     if (!ascended) {
                         system.runTimeout(() => {
                             killer.runCommand(`title @p title Combat Ascension Ready!`);
                             killer.runCommand(`say Checking ascension stage ${i}`);
-                        }, 60);
+                        }, 100);
                         return;
                     }
                 }
@@ -1163,6 +1230,8 @@ world.beforeEvents.chatSend.subscribe((mcch) => {
                 `Added 1 to Combat Ascension`+
                 `"}]}`);
         }, 0);
+
+        combatCanAscend = false;
     }
 
     if (message === `asc`) {
@@ -1261,7 +1330,7 @@ world.beforeEvents.chatSend.subscribe((mcch) => {
     //             `§a- - - - - - - - - - - - - - - - - - -\n`+
     //             `    §fCombat Level: `+ combatLVL +`\n`+
     //             `    Combat XP: `+ combatXP +`\n`+
-    //             `    Combat Ascencion: `+ combatASC +`\n`+
+    //             `    Combat Ascension: `+ combatASC +`\n`+
     //             `§a- - - - - - - - - - - - - - - - - - -\n`+
     //             `"}]}`);
     //     }, 0);
